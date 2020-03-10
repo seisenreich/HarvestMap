@@ -1,3 +1,4 @@
+local L3 = Lib3Dv3
 
 local CallbackManager = LibNodeDetection.callbackManager
 local Events = LibNodeDetection.events
@@ -88,9 +89,9 @@ function Detection:OnUpdatePinTypeHandler()
 end
 
 function Detection.OnUpdateNodeListHandler()
-	if not Lib3D:IsValidZone() then return end
+	if not L3:IsValidZone() then return end
 	if ZO_CompassContainer:IsHidden() then return end
-	local camX, camZ, camY, forwardX, forwardZ, forwardY, rightX, rightZ, rightY = Lib3D:GetCameraRenderSpace()
+	local camX, camZ, camY, forwardX, forwardZ, forwardY, rightX, rightZ, rightY = L3:GetCameraRenderSpace()
 	camX, camZ, camY = GuiRender3DPositionToWorldPosition(camX, camZ, camY)
 	camX, camZ, camY = camX / 100, camZ / 100, camY / 100
 	
@@ -157,7 +158,7 @@ function Detection.OnUpdateNodeListHandler()
 					Detection.unknownPositionCompassPins[control.id] = nil
 					control.worldX = worldX
 					control.worldY = worldY
-					control.globalX, control.globalY = Lib3D:WorldToGlobal(worldX, worldY)
+					control.globalX, control.globalY = L3:WorldToGlobal(worldX, worldY)
 					CallbackManager:FireCallbacks(Events.HARVEST_NODE_LOCATION_UPDATED, control)
 				end
 			end
